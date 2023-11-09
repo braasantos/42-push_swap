@@ -1,0 +1,2 @@
+all:
+	libft/make 
