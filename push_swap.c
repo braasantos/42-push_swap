@@ -1,6 +1,119 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "push_swap.h"
+
+int ft_abs(int a, int b)
+{
+    int c = (a - b);
+    if (c < 0)
+        c *= -1;
+    return (c);
+}
+int find_max(t_node **lst)
+{
+    int max;
+    if (!lst || !*lst)
+        return (0);
+    max = (*lst)->content;
+    t_node *current = (*lst)->next;
+    while(current)
+    {
+        if (current->content > max)
+            max = current->content;
+        current = current->next;
+    }
+    return (max);
+}
+void ft_check_target(t_node **lsta, t_node **lstb)
+{
+    t_node *currenta;
+    t_node *currentb;
+    int absdiff;
+
+    if ((!lsta || !*lsta) || (!lstb || !*lstb))
+        return ;
+    currenta = *lsta;
+    while(currenta)
+    { 
+        currenta->target = INT_MAX;
+        currentb = *lstb;
+        while(currentb)
+        {
+            absdiff = ft_abs(currenta->content, currentb->content);
+            if (absdiff < ft_abs(currenta->content, currenta->target) && currentb->content < currenta->content)
+                currenta->target = currentb->content;
+            currentb = currentb->next;
+        }
+        if(currenta->target == INT_MAX)
+            currenta->target = find_max(lstb);
+        printf("target a: %d\n", currenta->target);
+        currenta = currenta->next;
+    }
+}
+void ft_pushcost(t_node **lst)
+{
+    t_node *current;
+    int index;
+    if (!lst || !*lst)
+        return ;
+    current = *lst;
+    index = 0;
+    while (current)
+    {
+        current->index = index;
+        if (current->index <= (ft_lstsize(*lst) / 2))
+            current->push_cost = current->index;
+        else 
+            current->push_cost = (ft_lstsize(*lst) - current->index); 
+        current = current->next;
+        index++;
+    }
+}
+void ft_swap_b(t_node **lst, int flg)
+{
+    t_node *first;
+    t_node *second;
+    int temp;
+    if (!lst || !*lst || !(*lst)->next)
+        return ;
+    first = *lst;
+    second = (*lst)->next;
+    temp = first->content;
+    first->content = second->content;
+    second->content = temp;
+    *lst = first;
+    (*lst)->next = second;
+    if (flg == 1)
+        write(1, "sa\n", 3);
+}
+void ft_push_a(t_node **b, t_node **a, int flg)
+{
+    t_node *tmp;
+    if (!(*b))
+        return ;
+    tmp = *b;
+        *b = (*b)->next;
+        tmp->next = *a;
+        *a = tmp;
+    if (flg)
+        write(1, "pa\n", 3);
+}
+int ft_is_sorted(t_node **lst)
+{
+    int min;
+    if (!lst || !*lst)
+        return (1);
+    min = (*lst)->content;
+    t_node *current = (*lst)->next;
+    while(current)
+    {
+        if (current->content < min)
+            return (0);
+        min = current->content;
+        current = current->next;
+    }
+    return (1);
+}
 void ft_reverse_rotate_a(t_node **lst, int flg)
 {
     if (!(*lst) || !lst || !(*lst)->next)
@@ -18,13 +131,6 @@ void ft_reverse_rotate_a(t_node **lst, int flg)
     secodLast->next = NULL;
     if (flg)
         write(1, "rra\n", 4);
-    t_node *current = *lst;
-    while (current)
-    {
-        printf("%d ", current->content);
-        current = current->next;
-    }
-    printf("\n");
 }
 t_node	*ft_newnode(int content)
 {
@@ -49,13 +155,6 @@ void ft_rotate_a(t_node **lst, int flg)
     tmp->next = ft_newnode(first->content);
     if (flg)
         write(1, "ra\n", 3);
-    t_node *current = *lst;
-    while (current)
-    {
-        printf("%d ", current->content);
-        current = current->next;
-    }
-     printf("\n");
 }
 int	ft_lstsize(t_node *lst)
 {
@@ -75,19 +174,11 @@ void ft_push_b(t_node **a, t_node **b, int flg)
     if (!(*a))
         return ;
     tmp = *a;
-        *a = (*a)->next;
-        tmp->next = *b;
-        *b = tmp;
+    *a = (*a)->next;
+    tmp->next = *b;
+    *b = tmp;
     if (flg)
         write(1, "pb\n", 3);
-    t_node *current = *b;
-    printf("STACK B\n");
-    while (current)
-    {
-        printf("%d ", current->content);
-        current = current->next;
-    }
-    printf("\n");
 }
 /*atualiza a lista com o index do menor numero*/
 int ft_getindex(t_node **lst)
@@ -140,13 +231,6 @@ void ft_swap_a(t_node **lst, int flg)
     second->content = temp;
     *lst = first;
     (*lst)->next = second;
-    t_node *current = *lst;
-    while (current)
-    {
-        printf("%d ", current->content);
-        current = current->next;
-    }
-    printf("\n");
     if (flg)
         write(1, "sa\n", 3);
 }
@@ -161,9 +245,9 @@ void ft_sort_3(t_node **lst)
     int b = (*lst)->next->content;
     int c = (*lst)->next->next->content;
 
-    if (a > b && c > a) // certa
+    if (a > b && c > a)
         ft_swap_a(lst, 1);
-    else if (a > b && b > c) // certo
+    else if (a > b && b > c)
     {
         ft_swap_a(lst, 1);
         ft_reverse_rotate_a(lst, 1);
@@ -175,30 +259,66 @@ void ft_sort_3(t_node **lst)
         ft_swap_a(lst, 1);
         ft_rotate_a(lst, 1);
     }
-    else if (a > b && c > b) // certa
+    else if (a > b && c > b)
         ft_rotate_a(lst, 1);
 
 }
-
+void ft_push_to_b(t_node **lsta, t_node **lstb)
+{
+    int i;
+    int j;
+    i = (*lsta)->content;
+    j = (*lstb)->content;
+    if(i > j)
+    {
+        ft_swap_b(lstb, 1);
+        ft_push_b(lsta, lstb, 1);
+    }
+    else
+        ft_push_b(lsta, lstb, 1);
+}
+void ft_sort_final(t_node **lsta, t_node **lstb)
+{
+    t_node *currenta = *lsta;
+    // t_node *currentb = *lstb;
+    while (ft_lstsize(*lsta) > 3 && ft_lstsize(*lstb) < 2)
+            ft_push_b(lsta, lstb, 1);
+    if (ft_lstsize(*lsta) == 3)
+        ft_sort_3(lsta);
+    ft_check_target(lsta, lstb);
+    ft_pushcost(lsta);
+    // ft_pushcost(lstb);
+    while (currenta)
+    {
+        if (currenta->push_cost == 0)
+            ft_push_b(lsta, lstb, 1);
+        currenta = currenta->next;
+    }
+}
 /*ve o tamanho da lista para realizar as operacoes*/
 void ft_sort(t_node **lst)
 {
     t_stack *b = (t_stack *)malloc(sizeof(t_stack));
     b->top = NULL;
-    if (ft_lstsize(*lst) <= 3)
+    if (ft_lstsize(*lst) == 2)
     {
-        if (ft_lstsize(*lst) == 2)
-            ft_sort_2(lst);
-        else
-            ft_sort_3(lst);
+        ft_sort_2(lst);
         ft_free_stack(b);
     }
-    // else// ft_push_b(lst, &b->top, 1);
-    // {
-    //     ft_reverse_rotate_a(lst, 1);
-    //     ft_rotate_a(lst, 1);
-    // }
-    //else if (ft_lstsize(*lst) >= 10 && ft_lstsize(*lst) <= 100)
+    else if (ft_lstsize(*lst) == 3)
+    {
+        ft_sort_3(lst);
+        ft_free_stack(b);
+    }
+    else
+        ft_sort_final(lst, &b->top);
+    t_node *current = b->top;
+    printf("stack b\n");
+    while (current) {
+        printf("%d ", current->content);
+        current = current->next;
+    }
+    printf("\n");
 }
 int ft_check_dup(t_node *a)
 {
@@ -322,22 +442,6 @@ t_stack *ft_verify_create(int ac, char **av)
     find_min(&a->top);
     return (a);
 }
-int ft_is_sorted(t_node **lst)
-{
-    int min;
-    if (!lst || !*lst)
-        return (1);
-    min = (*lst)->content;
-    t_node *current = (*lst)->next;
-    while(current)
-    {
-        if (current->content < min)
-            return (0);
-        min = current->content;
-        current = current->next;
-    }
-    return (1);
-}
 int main(int ac, char **av)
 {
     t_stack *a = (t_stack *)malloc(sizeof(t_stack));
@@ -352,12 +456,12 @@ int main(int ac, char **av)
     }
     if (!ft_is_sorted(&a->top))
         ft_sort(&a->top);
-    // t_node *current = a->top;
-    // while (current) {
-    //     printf("%d ", current->content);
-    //     current = current->next;
-    // }
-    // printf("\n");
+    t_node *current = a->top;
+    while (current) {
+        printf("%d ", current->content);
+        current = current->next;
+    }
+    printf("\n");
     ft_free_stack(a);
     return (0);
 }

@@ -1,36 +1,38 @@
 #---------------VARIAVEIS-----------#
-NAME = push_swap.a
+NAME = push_swap
 
-SRCS =
-LIBFT_PATH = /42 Cursus/LIBFT
+SRCS = push_swap.c 
 
 HEADER = push_swap.h
 
 OBJS = $(SRCS:.c=.o)
-OBJSB = $(BONUS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Werror -Wextra 
-COMPLIER = $(CC) $(CFLAGS)
+COMPILER = $(CC) $(CFLAGS)
 RM = rm -f
+
 #------------REGRAS--------------#
-#compila o projeto
+# compiles the project
 all: $(NAME)
 
 %.o : %.c 
-	$(COMPLIER) -c $< -o $@
+	$(COMPILER) -c $< -o $@
 
-$(NAME): $(OBJS) $(HEADER)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS)
+	@echo "Created objs daddy"
+	$(COMPILER) -o $(NAME) $(OBJS)
 
-#limpa os arquivos criados na compilacao
+# cleans the object files
 clean:
 	$(RM) $(OBJS)
 
-#limpa os arquivos criados e mas tambem a biblioteca estatica
+# cleans the object files and the executable
 fclean: clean
+	@echo "Deleted objs daddy"
 	$(RM) $(NAME)
 
+# cleans and rebuilds the project
 re: fclean all
 
 .PHONY: all clean fclean re
-# .SILENT:
+.SILENT:
