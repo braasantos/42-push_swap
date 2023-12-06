@@ -12,8 +12,10 @@ typedef struct s_node
 {
   	int						content;
 	int						index;
-	int						target;
 	int						push_cost;
+	struct s_node			*target;
+	int						cheapest_nbr;
+	int						cheapest_nbr_index;
 	struct s_node			*next;
 	struct s_node			*prev;
 }               t_node;
@@ -32,12 +34,12 @@ void ft_rotate_a(t_node **lst, int flg);
 void ft_rotate_b(t_node **lst, int flg);
 void ft_rr(t_node **lsta, t_node **lstb, int flg);
 void ft_reverse_rotate_a(t_node **lst, int flg);
-void ft_reverse_rotate_a(t_node **lst, int flg);
+void ft_reverse_rotate_b(t_node **lst, int flg);
 void ft_rrr(t_node **lsta, t_node **lstb, int flg);
 /*UTILS*/
 t_node	*ft_newnode(int content);
 int	ft_lstsize(t_node *lst);
-int ft_getindex(t_node **lst);
+int ft_getindex(t_node **lst, t_node *node);
 void ft_curr_index(t_node **lst);
 void ft_free_stack(t_stack *stack);
 int ft_check_dup(t_node *a);

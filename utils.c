@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <unistd.h>
+#include "push_swap.h"
+
 t_node	*ft_newnode(int content)
 {
 	t_node	*new;
@@ -21,36 +25,35 @@ int	ft_lstsize(t_node *lst)
 	}
 	return (i);
 }
-/*atualiza a lista com o index do menor numero*/
-int ft_getindex(t_node **lst)
+int ft_getindex(t_node **lst, t_node *node)
 {
-    int min;
-    int idx = 0;
-    int idmin = 0;
-    if (!lst || !*lst)
-        return (0);
-    min = (*lst)->content;
-    t_node *current = (*lst)->next;
-    while(current)
+    t_node *current;
+    int idx;
+    
+    current= *lst;
+    idx= 0;
+    if (!node)
+        return -1;
+    while (current)
     {
-        idx++;
-        if (current->content < min)
+        if (current == node)
+            return (idx);
+        else 
         {
-            min = current->content;
-            idmin = idx;
+            current = current->next;
+            idx++;
         }
-        current = current->next;
     }
-    (*lst)->index = idx;
-    return (idmin);
+    return (idx);
 }
 void ft_free_stack(t_stack *stack)
 {
     if (!stack)
         return;
-
-    t_node *current = stack->top;
+    t_node *current;
     t_node *next;
+
+    current = stack->top;
     while (current) {
         next = current->next;
         free(current);

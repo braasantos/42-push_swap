@@ -1,7 +1,7 @@
 #---------------VARIAVEIS-----------#
 NAME = push_swap
 
-SRCS = push_swap.c 
+SRCS = push_swap.c operations_b.c operations_a.c utils_2.c utils.c
 
 HEADER = push_swap.h
 

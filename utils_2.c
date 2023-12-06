@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <unistd.h>
+#include "push_swap.h"
+
 /*bro just a isdigit*/
 int	ft_isdigit(int c)
 {
@@ -11,10 +15,12 @@ int	ft_isdigit(int c)
 int find_min(t_node **lst)
 {
     int min;
+    t_node *current;
+
     if (!lst || !*lst)
         return (0);
     min = (*lst)->content;
-    t_node *current = (*lst)->next;
+    current = (*lst)->next;
     while(current)
     {
         if (current->content < min)
@@ -39,10 +45,10 @@ void	ft_lstadd_back(t_node **lst, t_node *new)
 		aux = aux->next;
 	aux->next = new;
 }
-
 int ft_check_dup(t_node *a)
 {
     t_node *tmp;
+
     while(a)
     {
         tmp = a->next;
