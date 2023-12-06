@@ -17,7 +17,7 @@ void ft_swap_b(t_node **lst, int flg)
     *lst = first;
     (*lst)->next = second;
     if (flg == 1)
-        write(1, "sa\n", 3);
+        write(1, "sb\n", 3);
 }
 void ft_push_b(t_node **a, t_node **b, int flg)
 {
@@ -45,7 +45,7 @@ void ft_rotate_b(t_node **lst, int flg)
         tmp = tmp->next;
     tmp->next = ft_newnode(first->content);
     if (flg)
-        write(1, "ra\n", 3);
+        write(1, "rb\n", 3);
 }
 void ft_reverse_rotate_b(t_node **lst, int flg)
 {
@@ -65,5 +65,5 @@ void ft_reverse_rotate_b(t_node **lst, int flg)
     *lst = tmp;
     secodLast->next = NULL;
     if (flg)
-        write(1, "rra\n", 4);
+        write(1, "rrb\n", 4);
 }

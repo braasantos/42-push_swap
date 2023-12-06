@@ -60,22 +60,14 @@ t_node *find_max_node(t_node **lst)
     }
     return max;
 }
-
-void target_utls(t_node *content, t_node **lstb)
+void target_utls(t_node *content, t_node **lstb, t_node **lsta, char c)
 {
-    t_node *currenta;
-    t_node *currentb;
-
-    currenta = find_max_node(lstb);
-    currentb = *lstb;
-    printf("Max node of stack A %d\n", content->content);
-    if (content->content == INT_MAX)
-    {
-            content = find_max_node(lstb);
-            // content = find_max_node(lsta);
-    }
+    if (c == 'a')
+        content->target = find_max_node(lstb);
+    else 
+        content->target = find_max_node(lsta);
 }
-void ft_check_target(t_node **lsta, t_node **lstb)
+void ft_check_target(t_node **lsta, t_node **lstb, char c)
 {
     t_node *currenta;
     t_node *currentb;
@@ -98,7 +90,7 @@ void ft_check_target(t_node **lsta, t_node **lstb)
             currentb = currentb->next;
         }
         if (currenta->target->content == INT_MAX)
-            target_utls(currenta, lstb);
+            target_utls(currenta, lstb, lsta, c);
         currenta = currenta->next;
     }
 }
@@ -164,20 +156,21 @@ void ft_sort_3(t_node **lst)
 void ft_inita(t_node **lsta, t_node **lstb)
 {
     t_node *curr = *lsta;
-    ft_check_target(lsta, lstb);
+    ft_check_target(lsta, lstb, 'a');
     ft_pushcost(lsta);
     ft_cheapest_nbr(lsta);
-    printf("%d\n", curr->cheapest_nbr_index);
-    printf("%d\n", curr->cheapest_nbr);
+    printf("index do mais barato %d\n", curr->cheapest_nbr_index);
+    printf("nbr mais barato %d\n", curr->cheapest_nbr);
     while (curr)
     {
-        printf("node %d: target index: %d\n", curr->content, curr->target->content);
+        printf("node %d: target: %d\n", curr->content, curr->target->content);
+        printf("node %d: target index: %d\n", curr->content, curr->target->index);
         curr = curr->next;
     }
 }
 void ft_initb(t_node **lsta, t_node **lstb)
 {
-    ft_check_target(lstb, lsta);
+    ft_check_target(lstb, lsta, 'b');
     ft_pushcost(lstb);
     ft_cheapest_nbr(lstb);
     t_node *curr = *lstb;
@@ -188,33 +181,56 @@ void ft_initb(t_node **lsta, t_node **lstb)
 void ft_pass_a(t_node **lsta, t_node **lstb)
 {
     t_node *curra;
-    t_node *currb;
-    curra = *lsta;
-    currb = *lstb;
 
-    // while (curra)
-    // {
+    curra = *lsta;
+    int targetIndex;
+    int rotations;
+    while (curra)
+    {
         ft_inita(lsta, lstb);
-        // // if (curra->target != NULL && curra->target->index > 0)
-        // // {
-        // //     ft_swap_b(lstb, 1);
-        // //     ft_push_b(lsta, lstb, 1);
-        // // }
-        // if (curra->target->index >= (ft_lstsize(*lstb) / 2))
-        //     ft_rotate_b(lstb, 1);
-        // else
-        //      ft_push_b(lsta, lstb, 1);
-    //     curra = curra->next;
-    // }
+        if (curra->target != NULL)
+        {
+            if (curra->target->index < (ft_lstsize(*lsta) / 2))
+            {
+                targetIndex = curra->target->index;
+                rotations = targetIndex;
+                while (rotations > 0)
+                {
+                    ft_reverse_rotate_b(lstb, 1);
+                    ft_inita(lsta, lstb);
+                    rotations--;
+                }
+                ft_push_b(lsta, lstb, 1);
+            }
+            else 
+            {
+                targetIndex = curra->target->index;
+                rotations = targetIndex;
+                while (rotations < 0)
+                {
+                    ft_rotate_b(lstb, 1);
+                    ft_inita(lsta, lstb);
+                    rotations++;
+                }
+                ft_push_b(lsta, lstb, 1);
+            }
+            if (curra->target->index == 0)
+                ft_push_b(lsta, lstb, 1);
+        }
+        curra = curra->next;
+    }
 }
+
 void ft_sort_final(t_node **lsta, t_node **lstb)
 {
     while (ft_lstsize(*lsta) > 3 && ft_lstsize(*lstb) < 2)
-            ft_push_b(lsta, lstb, 1);
-    if (ft_lstsize(*lsta) == 3)
-        ft_sort_3(lsta);
+    {
+        ft_push_b(lsta, lstb, 1);
+        if (ft_lstsize(*lsta) == 3)
+            ft_sort_3(lsta);
+    }
     if (!ft_is_sorted(lsta))
-        ft_pass_a(lsta, lstb);
+      ft_pass_a(lsta, lstb);
 }
 /*ve o tamanho da lista para realizar as operacoes*/
 void ft_sort(t_node **lst)
@@ -235,7 +251,8 @@ void ft_sort(t_node **lst)
         ft_sort_final(lst, &b->top);
     t_node *current = b->top;
     printf("stack b\n");
-    while (current) {
+    while (current)
+    {
         printf("%d ", current->content);
         current = current->next;
     }

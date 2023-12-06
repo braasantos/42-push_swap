@@ -30,8 +30,8 @@ int ft_getindex(t_node **lst, t_node *node)
     t_node *current;
     int idx;
     
-    current= *lst;
-    idx= 0;
+    current = *lst;
+    idx = 0;
     if (!node)
         return -1;
     while (current)
