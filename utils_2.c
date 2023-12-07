@@ -12,23 +12,24 @@ int	ft_isdigit(int c)
 	return (0);
 }
 /*encontra o menor numero da lista e devolve ele*/
-int find_min(t_node **lst)
+t_node *find_min(t_node **lst)
 {
-    int min;
+    t_node *min_node;
     t_node *current;
 
     if (!lst || !*lst)
-        return (0);
-    min = (*lst)->content;
+        return NULL;
+    min_node = *lst;
     current = (*lst)->next;
-    while(current)
+    while (current)
     {
-        if (current->content < min)
-            min = current->content;
+        if (current->content < min_node->content)
+            min_node = current;
         current = current->next;
     }
-    return (min);
+    return min_node;
 }
+
 /*Funcao serve para adicionar um novo node e coloca o content (numero) para o node*/
 /*adiciona o novo no criado para o fim da linked list*/
 void	ft_lstadd_back(t_node **lst, t_node *new)

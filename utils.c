@@ -29,9 +29,11 @@ int ft_getindex(t_node **lst, t_node *node)
 {
     t_node *current;
     int idx;
+    int median;
     
     current = *lst;
     idx = 0;
+    median = ft_lstsize(*lst) / 2;
     if (!node)
         return -1;
     while (current)
@@ -66,3 +68,25 @@ void ft_error(void)
     write(1, "Error\n", 6);
     exit(1);
 }
+void ft_median(t_node **lst)
+{
+    int median;
+    t_node *curr;
+    int i;
+
+    if (!lst || !(*lst))
+        return;
+    median = ft_lstsize(*lst) / 2;
+    curr = *lst;
+    i = ft_getindex(lst, curr);
+    while (curr)
+    {
+        if (i <= median)
+            curr->above_median = true;
+        else
+            curr->above_median = false;
+        curr = curr->next;
+        i++;
+    }
+}
+
