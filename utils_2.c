@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <unistd.h>
 #include "push_swap.h"
 
 /*bro just a isdigit*/
@@ -12,22 +10,24 @@ int	ft_isdigit(int c)
 	return (0);
 }
 /*encontra o menor numero da lista e devolve ele*/
-t_node *find_min(t_node **lst)
+t_node	*find_min(t_node *lst)
 {
-    t_node *min_node;
-    t_node *current;
+	long	min;
+	t_node	*current;
 
-    if (!lst || !*lst)
-        return NULL;
-    min_node = *lst;
-    current = (*lst)->next;
-    while (current)
-    {
-        if (current->content < min_node->content)
-            min_node = current;
-        current = current->next;
-    }
-    return min_node;
+	if (!lst)
+		return (NULL);
+	min = LONG_MAX;
+	while (lst)
+	{
+		if (lst->content < min)
+		{
+			min = lst->content;
+			current = lst;
+		}
+		lst = lst->next;
+	}
+	return (current);
 }
 
 /*Funcao serve para adicionar um novo node e coloca o content (numero) para o node*/
@@ -46,20 +46,29 @@ void	ft_lstadd_back(t_node **lst, t_node *new)
 		aux = aux->next;
 	aux->next = new;
 }
-int ft_check_dup(t_node *a)
-{
-    t_node *tmp;
 
-    while(a)
-    {
-        tmp = a->next;
-        while (tmp)
-        {
-            if (a->content == tmp->content)
-                return (1);
-            tmp = tmp->next;
-        }
-        a = a->next;
-    }
-    return (0);
+int	ft_check_dup(t_node *a)
+{
+	t_node	*tmp;
+
+	if (!a)
+		return (0);
+	while(a)
+	{
+		tmp = a->next;
+		while (tmp)
+		{
+			if (a->content == tmp->content)
+				return (1);
+			tmp = tmp->next;
+		}
+		a = a->next;
+	}
+	return (0);
+}
+
+void	ft_error(void)
+{
+	write(1, "Error\n", 6);
+	exit(1);
 }

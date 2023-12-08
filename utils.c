@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <unistd.h>
 #include "push_swap.h"
 
 t_node	*ft_newnode(int content)
@@ -13,6 +11,7 @@ t_node	*ft_newnode(int content)
 	new->next = NULL;
 	return (new);
 }
+
 int	ft_lstsize(t_node *lst)
 {
 	int	i;
@@ -25,68 +24,62 @@ int	ft_lstsize(t_node *lst)
 	}
 	return (i);
 }
-int ft_getindex(t_node **lst, t_node *node)
-{
-    t_node *current;
-    int idx;
-    int median;
-    
-    current = *lst;
-    idx = 0;
-    median = ft_lstsize(*lst) / 2;
-    if (!node)
-        return -1;
-    while (current)
-    {
-        if (current == node)
-            return (idx);
-        else 
-        {
-            current = current->next;
-            idx++;
-        }
-    }
-    return (idx);
-}
-void ft_free_stack(t_stack *stack)
-{
-    if (!stack)
-        return;
-    t_node *current;
-    t_node *next;
 
-    current = stack->top;
-    while (current) {
-        next = current->next;
-        free(current);
-        current = next;
-    }
-    free(stack);
-}
-void ft_error(void)
+int	ft_getindex(t_node **lst, t_node *node)
 {
-    write(1, "Error\n", 6);
-    exit(1);
-}
-void ft_median(t_node **lst)
-{
-    int median;
-    t_node *curr;
-    int i;
+	t_node	*current;
+	int	idx;
 
-    if (!lst || !(*lst))
-        return;
-    median = ft_lstsize(*lst) / 2;
-    curr = *lst;
-    i = ft_getindex(lst, curr);
-    while (curr)
-    {
-        if (i <= median)
-            curr->above_median = true;
-        else
-            curr->above_median = false;
-        curr = curr->next;
-        i++;
-    }
+	current = *lst;
+	idx = 0;
+	if (!node)
+		return (-1);
+	while (current)
+	{
+		if (current == node)
+			return (idx);
+		else
+		{
+			current->index = idx;
+			current = current->next;
+			idx++;
+		}
+	}
+	return (-1);
+}
+void	ft_currindex(t_node *lst)
+{
+	int	idx;
+	int	median;
+
+	idx = 0;
+	median = ft_lstsize(lst) / 2;
+	while (lst)
+	{
+		lst->index = idx;
+		if (idx <= median)
+			lst->above_median = 1;
+		else
+			lst->above_median = 0;
+		lst = lst->next;
+		++idx;
+	}
 }
 
+void	ft_free_stack(t_node **stack)
+{
+	t_node	*current;
+	t_node	*next;
+	
+	if (!stack)
+		return ;
+	current = *stack;
+	while (current)
+	{
+		next = current->next;
+		current->content = 0;
+		free(current);
+		current = next;
+	}
+	*stack =NULL;
+}
