@@ -6,7 +6,7 @@
 /*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:58:20 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 09:30:02 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:08:01 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_rotate_a(t_node **lst, int flg)
 	*lst = (*lst)->next;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = ft_newnode(first->content);
+	tmp->next = first;
+	first->next = NULL;
 	if (flg)
 		write(1, "ra\n", 3);
 }

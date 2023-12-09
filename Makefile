@@ -6,7 +6,7 @@ LIBFT = ./libft/libft.a
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d) 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 COMPILER = $(CC) $(CFLAGS)
 RM = rm -f
 

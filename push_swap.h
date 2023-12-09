@@ -6,7 +6,7 @@
 /*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 09:00:46 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 10:27:30 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 18:24:54 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	ft_sort_final(t_node **lsta, t_node **lstb);
 int		ft_is_sorted(t_node *lst);
 /*ERROR AND FREE*/
 void	ft_error(t_node **lst);
-void	ft_free_stack(t_node **stack);
+void	ft_free_stack(t_node *stack);
+void ft_free_split(char **av);
 /*SPLIT*/
 char	**ft_split(char const *s, char c);
 int		ft_free(char **new_arr, int count);

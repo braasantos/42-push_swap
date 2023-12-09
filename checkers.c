@@ -6,7 +6,7 @@
 /*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 09:05:21 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 10:24:17 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 20:52:14 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_pushcost(t_node *lsta, t_node *lstb)
 	while (lsta)
 	{
 		lsta->push_cost = lsta->index;
-		if (lsta->above_median)
+		if (!(lsta->above_median))
 			lsta->push_cost = len_a - (lsta->index);
 		if (lsta->target->above_median)
 			lsta->push_cost += lsta->target->index; 

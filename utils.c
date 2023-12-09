@@ -6,7 +6,7 @@
 /*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:53:50 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 10:23:56 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 21:04:56 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_node	*ft_newnode(int content)
 
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
+	{
+		free(new);
 		return (NULL);
+	}
 	new->content = content;
 	new->next = NULL;
 	return (new);
@@ -79,20 +82,14 @@ void	ft_currindex(t_node *lst)
 	}
 }
 
-void	ft_free_stack(t_node **stack)
+void	ft_free_stack(t_node *stack)
 {
-	t_node	*current;
-	t_node	*next;
+	t_node	*tmp;
 
-	if (!stack)
-		return ;
-	current = *stack;
-	while (current)
+	while (stack)
 	{
-		next = current->next;
-		current->content = 0;
-		free(current);
-		current = next;
+		tmp = stack->next;
+		free(stack);
+		stack = tmp;
 	}
-	*stack = NULL;
 }

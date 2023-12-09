@@ -6,7 +6,7 @@
 /*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:55:09 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 10:23:14 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 17:59:04 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_check_dup(t_node *a)
 
 void	ft_error(t_node **lst)
 {
-	ft_free_stack(lst);
+	ft_free_stack(*lst);
 	write(1, "Error\n", 6);
 	exit(1);
 }
