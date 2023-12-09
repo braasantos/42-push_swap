@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjorge-m <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:35:51 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/10/12 15:37:25 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 10:16:58 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+// #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
-{
-	int	i;
+// int	ft_lstsize(t_list *lst)
+// {
+// 	int	i;
 
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
-}
+// 	i = 0;
+// 	while (lst)
+// 	{
+// 		lst = lst->next;
+// 		i++;
+// 	}
+// 	return (i);
+// }

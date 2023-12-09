@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkers.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/09 09:05:21 by bjorge-m          #+#    #+#             */
+/*   Updated: 2023/12/09 10:24:17 by bjorge-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_check_target_a(t_node *lsta, t_node *lstb)
@@ -26,12 +38,13 @@ void	ft_check_target_a(t_node *lsta, t_node *lstb)
 		lsta = lsta->next;
 	}
 }
+
 void	ft_check_target_b(t_node *lsta, t_node *lstb)
 {
 	t_node	*currenta;
 	t_node	*target_node;
 	long	match;
-	
+
 	while (lstb)
 	{
 		match = LONG_MAX;
@@ -52,13 +65,14 @@ void	ft_check_target_b(t_node *lsta, t_node *lstb)
 		lstb = lstb->next;
 	}
 }
+
 void	ft_pushcost(t_node *lsta, t_node *lstb)
 {
-	int	len_a;
-	int	len_b;
+	int		len_a;
+	int		len_b;
 
-	len_a = ft_lstsize(lsta);
-	len_b = ft_lstsize(lstb);
+	len_a = ft_size(lsta);
+	len_b = ft_size(lstb);
 	while (lsta)
 	{
 		lsta->push_cost = lsta->index;
@@ -88,10 +102,11 @@ void	ft_push(t_node **lst, t_node *node, char stack)
 			if (node->above_median)
 				ft_rotate_b(lst, 1);
 			else 
-				ft_reverse_rotate_b(lst, 1);   
+				ft_reverse_rotate_b(lst, 1);
 		}
 	}
 }
+
 void	last_thing(t_node **lsta)
 {
 	while ((*lsta)->content != find_min(*lsta)->content)

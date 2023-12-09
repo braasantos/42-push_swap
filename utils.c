@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/09 08:53:50 by bjorge-m          #+#    #+#             */
+/*   Updated: 2023/12/09 10:23:56 by bjorge-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_node	*ft_newnode(int content)
@@ -12,7 +24,7 @@ t_node	*ft_newnode(int content)
 	return (new);
 }
 
-int	ft_lstsize(t_node *lst)
+int	ft_size(t_node *lst)
 {
 	int	i;
 
@@ -28,7 +40,7 @@ int	ft_lstsize(t_node *lst)
 int	ft_getindex(t_node **lst, t_node *node)
 {
 	t_node	*current;
-	int	idx;
+	int		idx;
 
 	current = *lst;
 	idx = 0;
@@ -47,13 +59,14 @@ int	ft_getindex(t_node **lst, t_node *node)
 	}
 	return (-1);
 }
+
 void	ft_currindex(t_node *lst)
 {
 	int	idx;
 	int	median;
 
 	idx = 0;
-	median = ft_lstsize(lst) / 2;
+	median = ft_size(lst) / 2;
 	while (lst)
 	{
 		lst->index = idx;
@@ -70,7 +83,7 @@ void	ft_free_stack(t_node **stack)
 {
 	t_node	*current;
 	t_node	*next;
-	
+
 	if (!stack)
 		return ;
 	current = *stack;
@@ -81,5 +94,5 @@ void	ft_free_stack(t_node **stack)
 		free(current);
 		current = next;
 	}
-	*stack =NULL;
+	*stack = NULL;
 }

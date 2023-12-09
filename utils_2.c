@@ -1,14 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/09 08:55:09 by bjorge-m          #+#    #+#             */
+/*   Updated: 2023/12/09 10:23:14 by bjorge-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*bro just a isdigit*/
 int	ft_isdigit(int c)
 {
-	if ((c >= 48 && c <= 57 )|| (c == '-' || c == '+'))
-	{
+	if ((c >= 48 && c <= 57) || (c == '-' || c == '+'))
 		return (1);
-	}
 	return (0);
 }
+
 /*encontra o menor numero da lista e devolve ele*/
 t_node	*find_min(t_node *lst)
 {
@@ -30,9 +41,10 @@ t_node	*find_min(t_node *lst)
 	return (current);
 }
 
-/*Funcao serve para adicionar um novo node e coloca o content (numero) para o node*/
+/*Funcao serve para adicionar um novo node 
+ * e coloca o content (numero) para o node*/
 /*adiciona o novo no criado para o fim da linked list*/
-void	ft_lstadd_back(t_node **lst, t_node *new)
+void	ft_lstadd(t_node **lst, t_node *new)
 {
 	t_node	*aux;
 
@@ -53,7 +65,7 @@ int	ft_check_dup(t_node *a)
 
 	if (!a)
 		return (0);
-	while(a)
+	while (a)
 	{
 		tmp = a->next;
 		while (tmp)
@@ -67,8 +79,9 @@ int	ft_check_dup(t_node *a)
 	return (0);
 }
 
-void	ft_error(void)
+void	ft_error(t_node **lst)
 {
+	ft_free_stack(lst);
 	write(1, "Error\n", 6);
 	exit(1);
 }

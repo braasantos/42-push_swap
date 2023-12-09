@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rota.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/09 08:58:20 by bjorge-m          #+#    #+#             */
+/*   Updated: 2023/12/09 09:30:02 by bjorge-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_rev_rotate_a_b(t_node **lsta, t_node **lstb, t_node *node)
@@ -10,10 +22,13 @@ void	ft_rev_rotate_a_b(t_node **lsta, t_node **lstb, t_node *node)
 
 void	ft_rotate_a(t_node **lst, int flg)
 {
+	t_node	*tmp;
+	t_node	*first;
+
 	if (!(*lst) || !lst || !(*lst)->next)
 		return ;
-	t_node *tmp = *lst;
-	t_node *first = *lst;
+	tmp = *lst;
+	first = *lst;
 	*lst = (*lst)->next;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
@@ -49,11 +64,12 @@ void	ft_cheapest_nbr(t_node *lst)
 	}
 	cheapest_node->cheapest_nbr = 1;
 }
+
 long	ft_atol(const char *nptr)
 {
-	int	sign;
+	int		sign;
 	long	num;
-	
+
 	sign = 1;
 	num = 0;
 	while ((*nptr >= 9 && *nptr <= 13) || (*nptr == 32))
@@ -64,16 +80,16 @@ long	ft_atol(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
-    if (*nptr == '\0')
+	if (*nptr == '\0')
 		return (2147483649);
 	while (*nptr)
 	{
-        if (!ft_isdigit(*nptr))
+		if (!ft_isdigit(*nptr))
 			return (2147483649);
 		num = num * 10 + *nptr - 48;
 		nptr++;
 	}
-    if ((num * sign) > 2147483647 || (num * sign) < -2147483648)
+	if ((num * sign) > 2147483647 || (num * sign) < -2147483648)
 		return (2147483649);
 	return (num * sign);
 }

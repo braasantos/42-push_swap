@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stacks.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/09 08:52:20 by bjorge-m          #+#    #+#             */
+/*   Updated: 2023/12/09 10:24:40 by bjorge-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_sort_3(t_node **lst)
 {
 	t_node	*biggest_nbr;
-	
+
 	biggest_nbr = find_max_node(*lst);
 	if (biggest_nbr == *lst)
 		ft_rotate_a(lst, 1);
 	else if ((*lst)->next == biggest_nbr)
 		ft_reverse_rotate_a(lst, 1);
-	if ((*lst)->content >(*lst)->next->content)
+	if ((*lst)->content > (*lst)->next->content)
 		ft_swap_a(lst, 1);
 }
 
 void	ft_sort(t_node **lst, t_node **lstb)
 {
-	if (ft_lstsize(*lst) == 2)
+	if (ft_size(*lst) == 2)
 		ft_swap_a(lst, 1);
-	else if (ft_lstsize(*lst) == 3)
+	else if (ft_size(*lst) == 3)
 		ft_sort_3(lst);
 	else
 		ft_sort_final(lst, lstb);
@@ -27,7 +39,7 @@ int	ft_is_sorted(t_node *lst)
 {
 	if (!lst)
 		return (1);
-	while(lst->next)
+	while (lst->next)
 	{
 		if (lst->content > lst->next->content)
 			return (0);
@@ -38,24 +50,21 @@ int	ft_is_sorted(t_node *lst)
 
 void	ft_verify_create(t_node **lst, int ac, char **av)
 {
-	int	i;
+	int		i;
 	long	j;
 
 	j = 0;
 	if (ac < 2)
-		ft_error();
+		ft_error(lst);
 	else
 	{
-		i = 1;
+		i = 0;
 		while (av[i])
 		{
 			j = ft_atol(av[i]);
 			if (j == 2147483649)
-			{
-				ft_free_stack(lst);
-				ft_error();
-			}
-			ft_lstadd_back(lst, ft_newnode(j));
+				ft_error(lst);
+			ft_lstadd(lst, ft_newnode(j));
 			i++;
 		}
 	}
@@ -65,7 +74,7 @@ void	ft_sort_final(t_node **lsta, t_node **lstb)
 {
 	int	len;
 
-	len = ft_lstsize(*lsta);
+	len = ft_size(*lsta);
 	if (len-- > 3 && !ft_is_sorted(*lsta))
 		ft_push_b(lsta, lstb, 1);
 	if (len-- > 3 && !ft_is_sorted(*lsta))

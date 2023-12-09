@@ -1,7 +1,8 @@
 #---------------VARIAVEIS-----------#
 NAME = push_swap
-SRCS = push_swap.c operations_b.c operations_a.c utils_2.c utils.c rota.c stacks.c stacks_2.c last.c checkers.c
+SRCS = push_swap.c operations_b.c operations_a.c utils_2.c utils.c rota.c stacks.c stacks_2.c last.c checkers.c ft_split.c
 INC = push_swap.h
+LIBFT = ./libft/libft.a
 OBJS = $(SRCS:.c=.o)
 DEPS = $(OBJS:.o=.d) 
 CC = cc
@@ -18,7 +19,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "Created objs daddy"
-	$(COMPILER) $(OBJS) -o $(NAME)
+	$(COMPILER) $(OBJS) $(LIBFT) -o $(NAME)
 
 # cleans the object files
 clean:

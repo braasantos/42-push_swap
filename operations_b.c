@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations_b.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/09 08:50:18 by bjorge-m          #+#    #+#             */
+/*   Updated: 2023/12/09 09:28:15 by bjorge-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ft_swap_b(t_node **lst, int flg)
 {
 	t_node	*first;
 	t_node	*second;
-	int	temp;
+	int		temp;
 
 	if (!lst || !*lst || !(*lst)->next)
 		return ;
@@ -22,7 +34,7 @@ void	ft_swap_b(t_node **lst, int flg)
 void	ft_push_b(t_node **a, t_node **b, int flg)
 {
 	t_node	*tmp;
-	
+
 	if (!(*a))
 		return ;
 	tmp = *a;
@@ -53,20 +65,20 @@ void	ft_rotate_b(t_node **lst, int flg)
 void	ft_reverse_rotate_b(t_node **lst, int flg)
 {
 	t_node	*tmp;
-	t_node	*secodLast;
+	t_node	*second_last;
 
 	if (!(*lst) || !lst || !(*lst)->next)
 		return ;
 	tmp = *lst;
-	secodLast = NULL;
+	second_last = NULL;
 	while (tmp->next != NULL)
 	{
-		secodLast = tmp;
+		second_last = tmp;
 		tmp = tmp->next;
 	}
 	tmp->next = *lst;
 	*lst = tmp;
-	secodLast->next = NULL;
+	second_last->next = NULL;
 	if (flg)
 		write(1, "rrb\n", 4);
 }

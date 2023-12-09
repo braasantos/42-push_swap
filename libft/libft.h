@@ -6,7 +6,7 @@
 /*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:41:07 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/11/13 13:14:39 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/09 10:18:08 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 typedef struct s_list
 {
 	int					content;
-	struct s_list			*next;
+	struct s_list		*next;
+
 }								t_list;
 ///////////////////////////////
 
