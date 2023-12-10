@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 09:00:46 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 18:24:54 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:56:42 by braasantos       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ long	ft_atol(const char *nptr);
 int		ft_size(t_node *lst);
 int		ft_isdigit(int c);
 int		ft_check_dup(t_node *a);
-
+t_node *find_last(t_node *lst);
 /*STACKS*/
 void	ft_a_para_b(t_node **lsta, t_node **lstb);
 void	ft_b_para_a(t_node **lsta, t_node **lstb);
@@ -71,7 +71,7 @@ void	ft_cheapest_nbr(t_node *lst);
 int		ft_getindex(t_node **lst, t_node *node);
 t_node	*find_min(t_node *lst);
 t_node	*find_max_node(t_node *lst);
-t_node	*ft_newnode(int content);
+t_node	*ft_newnode(t_node **lst, int content);
 /*ALGORITHM*/
 void	ft_sort(t_node **lst, t_node **lstb);
 void	ft_sort_3(t_node **lst);
@@ -80,7 +80,7 @@ int		ft_is_sorted(t_node *lst);
 /*ERROR AND FREE*/
 void	ft_error(t_node **lst);
 void	ft_free_stack(t_node *stack);
-void ft_free_split(char **av);
+void	ft_free_split(char **av);
 /*SPLIT*/
 char	**ft_split(char const *s, char c);
 int		ft_free(char **new_arr, int count);

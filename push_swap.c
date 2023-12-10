@@ -14,13 +14,15 @@
 
 void ft_free_split(char **av)
 {
-    int i = 0;
-    while (av[i])
-    {
-        free(av[i]);
-        i++;
-    }
-    free(av);
+	int		i;
+
+	i = 0;
+	while (av[i])
+	{
+		free(av[i]);
+		i++;
+	}
+	free(av);
 }
 int	main(int ac, char **av)
 {

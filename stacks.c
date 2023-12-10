@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stacks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:52:20 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 20:49:13 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/10 14:01:43 by braasantos       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_verify_create(t_node **lst, int ac, char **av)
 			j = ft_atol(av[i]);
 			if (j == 2147483649)
 				ft_error(lst);
-			ft_lstadd(lst, ft_newnode(j));
+			ft_newnode(lst, j);
 			i++;
 		}
 	}

@@ -3,27 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:53:50 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 21:04:56 by bjorge-m         ###   ########.fr       */
+/*   Updated: 2023/12/10 13:48:35 by braasantos       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node	*ft_newnode(int content)
+t_node	*ft_newnode(t_node **lst, int content)
 {
 	t_node	*new;
+	t_node *last_node;
 
+	if (!lst)
+		return (NULL);
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
-	{
-		free(new);
 		return (NULL);
-	}
 	new->content = content;
 	new->next = NULL;
+	if (!(*lst))
+	{
+		*lst = new;
+		new->prev = NULL;
+	}
+	else
+	{
+		last_node = find_last(*lst);
+		last_node->next = new;
+		new->prev = last_node;
+	}
 	return (new);
 }
 
