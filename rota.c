@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rota.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:58:20 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/09 22:25:22 by braasantos       ###   ########.fr       */
+/*   Updated: 2023/12/13 20:30:59 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,20 @@ void	ft_rrr(t_node **lsta, t_node **lstb, int flg)
 void	ft_cheapest_nbr(t_node *lst)
 {
 	t_node	*cheapest_node;
+	t_node	*first;
 	long	cheapest_value;
 
 	if (!lst)
 		return ;
+	cheapest_node = NULL;
+	first = lst;
 	cheapest_value = LONG_MAX;
+	while (lst)
+	{
+		lst->cheapest_nbr = 0;
+		lst = lst->next;
+	}
+	lst = first;
 	while (lst)
 	{
 		if (lst->push_cost < cheapest_value)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stacks_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 09:03:03 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/10 08:47:47 by braasantos       ###   ########.fr       */
+/*   Updated: 2023/12/13 19:18:16 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ t_node	*ft_get_cheapest(t_node *lst)
 		return (NULL);
 	while (lst)
 	{
-		if (lst->cheapest_nbr == 1)
+		if (lst->cheapest_nbr)
 			return (lst);
+		else 
+			lst->cheapest_nbr = 0;
 		lst = lst->next;
 	}
 	return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 09:00:46 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/10 13:56:42 by braasantos       ###   ########.fr       */
+/*   Updated: 2023/12/13 19:21:17 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ long	ft_atol(const char *nptr);
 int		ft_size(t_node *lst);
 int		ft_isdigit(int c);
 int		ft_check_dup(t_node *a);
-t_node *find_last(t_node *lst);
+t_node	*find_last(t_node *lst);
 /*STACKS*/
 void	ft_a_para_b(t_node **lsta, t_node **lstb);
 void	ft_b_para_a(t_node **lsta, t_node **lstb);
@@ -61,10 +61,8 @@ void	ft_initb(t_node *lsta, t_node *lstb);
 void	ft_verify_create(t_node **lst, int ac, char **av);
 void	ft_inita(t_node *lsta, t_node *lstb);
 void	ft_check_target_b(t_node *lsta, t_node *ltsb);
-void	ft_pushcost(t_node *lsta, t_node *lstb);
 void	ft_check_target_a(t_node *lsta, t_node *ltsb);
 void	ft_push(t_node **lst, t_node *node, char stack);
-void	last_thing(t_node **lst);
 void	ft_rev_rotate_a_b(t_node **lsta, t_node **lstb, t_node *node);
 t_node	*ft_get_cheapest(t_node *lst);
 void	ft_cheapest_nbr(t_node *lst);
@@ -73,15 +71,16 @@ t_node	*find_min(t_node *lst);
 t_node	*find_max_node(t_node *lst);
 t_node	*ft_newnode(t_node **lst, int content);
 /*ALGORITHM*/
+void	ft_pushcost(t_node *lsta, t_node *lstb);
 void	ft_sort(t_node **lst, t_node **lstb);
 void	ft_sort_3(t_node **lst);
 void	ft_sort_final(t_node **lsta, t_node **lstb);
+void	last_thing(t_node **lst);
 int		ft_is_sorted(t_node *lst);
 /*ERROR AND FREE*/
 void	ft_error(t_node **lst);
 void	ft_free_stack(t_node *stack);
 void	ft_free_split(char **av);
 /*SPLIT*/
-char	**ft_split(char const *s, char c);
 int		ft_free(char **new_arr, int count);
 #endif

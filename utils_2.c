@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
+/*   By: bjorge-m <bjorge-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:55:09 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/10 08:40:13 by braasantos       ###   ########.fr       */
+/*   Updated: 2023/12/10 16:40:44 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*bro just a isdigit*/
 int	ft_isdigit(int c)
 {
-		if ((c >= 48 && c <= 57))
-			return (1);
+	if (c >= 48 && c <= 57)
+		return (1);
 	return (0);
 }
 
@@ -82,6 +82,6 @@ int	ft_check_dup(t_node *a)
 void	ft_error(t_node **lst)
 {
 	ft_free_stack(*lst);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(1);
 }

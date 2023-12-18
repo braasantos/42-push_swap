@@ -6,7 +6,7 @@
 /*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 08:53:50 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/10 13:48:35 by braasantos       ###   ########.fr       */
+/*   Updated: 2023/12/10 14:57:35 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_node	*ft_newnode(t_node **lst, int content)
 {
 	t_node	*new;
-	t_node *last_node;
+	t_node	*last_node;
 
 	if (!lst)
 		return (NULL);

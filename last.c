@@ -6,20 +6,21 @@
 /*   By: braasantos <braasantos@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 09:02:35 by bjorge-m          #+#    #+#             */
-/*   Updated: 2023/12/10 14:00:01 by braasantos       ###   ########.fr       */
+/*   Updated: 2023/12/10 14:58:43 by bjorge-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_node *find_last(t_node *lst)
+t_node	*find_last(t_node *lst)
 {
 	if (!lst)
 		return (NULL);
-	while(lst->next)
+	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }
+
 t_node	*find_max_node(t_node *lst)
 {
 	long	max;

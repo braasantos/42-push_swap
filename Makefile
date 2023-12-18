@@ -1,28 +1,25 @@
 #---------------VARIAVEIS-----------#
 NAME = push_swap
 SRCS = push_swap.c operations_b.c operations_a.c utils_2.c utils.c rota.c stacks.c stacks_2.c last.c checkers.c
-LIBFT = libft/libft.a
-LIBFT_DIR = libft/
 CC = cc
+HEADER = push_swap.h
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 COMPILER = $(CC) $(CFLAGS)
 RM = rm -f
+OBJS = $(SRCS:.c=.o)
 
-OBJS = *.o 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+%.o : %.c
+	$(COMPILER) -c $< -o $@
+
+$(NAME): $(OBJS) $(HEADER)
 	@echo "Created objs daddy"
-	$(COMPILER) -o $(NAME) $(OBJS) $(LIBFT)
+	$(COMPILER) -o $(NAME) $(OBJS)
 
-$(LIBFT):
-	$(MAKE)	-C $(LIBFT_DIR)
-
-$(OBJS): $(SRCS)
-	$(COMPILER) -c $(SRCS)
 # cleans the object files
 clean:
-	$(RM) $(OBJS) $(DEPS)
+	$(RM) $(OBJS)
 
 # cleans the object files and the executable
 fclean: clean
@@ -31,6 +28,6 @@ fclean: clean
 
 # cleans and rebuilds the project
 re: fclean all
-	$(MAKE)
+	
 .PHONY: all clean fclean re
-.SILENT:
+#.SILENT:
